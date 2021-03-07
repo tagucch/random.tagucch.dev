@@ -1,0 +1,9 @@
+{
+  "title": "random.tagucch.dev",
+  "desc": "技術とかのメモ",
+  "author": "tagucch",
+  "host": "https://random.tagucch.dev",
+  "postsDir": "/posts",
+  "feedPath": "/feed.xml",
+  "timeZone": "Asia/Tokyo"
+}
