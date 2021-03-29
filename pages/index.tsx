@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Layout from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
 import { getSortedPostData } from '../lib/posts'
 import Date from '../components/date'
 
@@ -15,11 +14,8 @@ const Home = ({
 }) => {
   return (
     <Layout home>
-      {/* Keep the existing code here */}
-
-      {/* Add this <section> tag below the existing <section> tag */}
-      <section className="text-xl pt-px">
-        <ul className="list-none p-0 m-0">
+      <section className="text-xl pt-px mt-5 splatfont">
+        <ul className="list-none m-0 w-1/2 mx-auto min-w-max">
           {allPosts.map(({ id, date, title }) => (
             <li className="mr-4" key={id}>
               <Link href={`/posts/${id}`}>
