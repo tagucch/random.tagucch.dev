@@ -10,8 +10,7 @@ const Layout = ({
     home?: boolean
   }) => {
   return (
-    // <div className={styles.container}>
-    <div className="max-w-xl mx-auto p-4 mt-12 mb-24">
+    <div className="mx-auto h-full min-h-screen bg-indigo-100 min-w-min">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -27,7 +26,7 @@ const Layout = ({
         <meta name="og:title" content={title} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className="flex flex-col items-center">
+      <header className="flex flex-col items-center bg-blue-200 pt-2 pb-5 splatfont">
         {home ? (
           <h1 className="text-4xl font-extrabold my-4">{title}</h1>
         ) : (
@@ -37,16 +36,9 @@ const Layout = ({
             </Link>
           </h1>
         )}
-        <h2>{desc}</h2>
+        <h2 className="splatfont">{desc}</h2>
       </header>
-      <main>{children}</main>
-      {!home && (
-        <div>
-          <Link href="/">
-            <a>← Back To Home</a>
-          </Link>
-        </div>
-      )}
+      <main className="pb-10">{children}</main>
     </div>
   )
 }
