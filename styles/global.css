@@ -65,18 +65,18 @@ a:hover {
   font-size: large;
 }
 
-.content ul li {
+.content > ul > li {
   list-style-type: disc;
   list-style-position: inside;
 }
 
-.content ul li ul li {
+.content > ul > li > ul > li {
   margin-left: 1rem;
   list-style-type: circle;
   list-style-position: inside;
 }
 
-.content ul li ul li ul li {
+.content > ul > li > ul > li ul li {
   margin-left: 2rem;
   list-style-type: square;
   list-style-position: inside;
@@ -84,4 +84,8 @@ a:hover {
 
 .content code, .content pre {
   background-color: rgba(209, 213, 219);
+}
+
+.content p {
+  line-height: 2rem;
 }
