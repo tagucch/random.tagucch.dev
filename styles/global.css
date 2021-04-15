@@ -28,7 +28,6 @@ body {
 }
 
 a {
-  color: #0070f3;
   text-decoration: none;
 }
 
@@ -87,5 +86,5 @@ a:hover {
 }
 
 .content p {
-  line-height: 2rem;
+  line-height: 1.8rem;
 }
