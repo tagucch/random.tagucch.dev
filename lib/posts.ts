@@ -8,6 +8,7 @@ type Post = {
   id: string
   date: string
   title: string
+  tags: string[]
 }
 
 const postsDir: string = path.join(process.cwd(), 'contents')
@@ -21,7 +22,7 @@ export const getSortedPostData = (): Post[] => {
     const matterResult = matter(fileContents)
     return {
       id,
-      ...matterResult.data as { date: string, title: string }
+      ...matterResult.data as { date: string, title: string, tags: string[] }
     }
   })
 
@@ -59,6 +60,7 @@ export const getPostData = async (id: string) => {
   return {
     id,
     contentHtml,
-    ...matterResult.data as { date: string, title: string },
+    ...matterResult.data as { date: string, title: string, tags: string[] },
   }
+}
 }
