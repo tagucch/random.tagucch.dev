@@ -14,15 +14,16 @@ const Home = ({
 }) => {
   return (
     <Layout home>
-      <section className="text-xl pt-px mt-5 splatfont">
+      <section className="text-xl pt-px mt-5">
         <ul className="list-none m-0 w-1/2 mx-auto min-w-max">
           {allPosts.map(({ id, date, title }) => (
-            <li className="mr-4" key={id}>
+            <li className="mr-4 mb-4 last:mb-0" key={id}>
+              <div className="text-base tracking-wider">
+                <Date dateString={date}></Date>
+              </div>
               <Link href={`/posts/${id}`}>
-                <a>{title}</a>
+                <a className="text-2xl splatfont">{title}</a>
               </Link>
-              <br />
-              <Date dateString={date}></Date>
             </li>
           ))}
         </ul>
