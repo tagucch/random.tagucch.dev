@@ -4,9 +4,9 @@ import matter from 'gray-matter'
 
 const postsDir: string = path.join(process.cwd(), 'contents')
 
-export type TagAndCount = { name: string, count: number }[]
+export type TagsAndCounts = { tagName: string, count: number }[]
 
-export const getAllTagsAndCount = (): TagAndCount=> {
+export const getAllTagsAndCount = (): TagsAndCounts => {
   const fileNames = fs.readdirSync(postsDir)
   const allTags: string[] = fileNames.flatMap(fileName => {
     const fullPath = path.join(postsDir, fileName)
@@ -14,17 +14,19 @@ export const getAllTagsAndCount = (): TagAndCount=> {
     const matterResult = matter(fileContents)
     return matterResult.data.tags
   })
-  const tagAndCount = allTags.reduce(
-    (acc: TagAndCount, currentValue: string) => {
+  const tagsAndCounts = [...new Set(allTags)].reduce(
+    (acc: TagsAndCounts, currentValue: string) => {
       const count = allTags.filter(tag => currentValue === tag).length
-      return {
-        ...acc,
-        count
-      }
-    } ,[] as TagAndCount
+      return [
+        ...acc, {
+          tagName: currentValue,
+          count
+        }
+      ] 
+    } ,[] as TagsAndCounts
   )
 
-  return tagAndCount
+  return tagsAndCounts
 }
 
 export const getAllTags = (): { params: { tag: string }}[] => {
