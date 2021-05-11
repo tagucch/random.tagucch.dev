@@ -10,8 +10,10 @@ import { searchPostsByTag } from '../../lib/posts'
 import { getAllTags } from '../../lib/tags'
 
 const PostFilteredByTag = ({
+  tag,
   posts
 }: {
+  tag: string,
   posts: {
     id: string,
     contentHtml: string,
@@ -22,15 +24,20 @@ const PostFilteredByTag = ({
 }) => {
   return (
     <Layout>
-      <section className="text-xl pt-px mt-5">
-        <ul className="list-none m-0 w-1/2 mx-auto min-w-max">
+      <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full">
+        <div className="mb-8 flex items-center">
+          <div className="bg-green-300 py-0.5 px-2 mr-1">{tag}</div> <div>の記事一覧</div>
+        </div>
+        <ul className="list-none m-0 mx-auto">
           {posts.map(({ id, date, title }) => (
-            <li className="mr-4 mb-4 last:mb-0" key={id}>
+            <li className="mb-4 last:mb-0" key={id}>
               <div className="text-base tracking-wider">
                 <Date dateString={date}></Date>
               </div>
               <Link href={`/posts/${id}`}>
-                <a className="text-2xl splatfont">{title}</a>
+                <a className="text-2xl splatfont">
+                  {title.length > 35 ? title.slice(0, 35).concat('…') : title}
+                </a>
               </Link>
             </li>
           ))}
@@ -54,6 +61,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
   const filteredPosts = searchPostsByTag(params?.tag as string)
   return {
     props: {
+      tag: params.tag,
       posts: filteredPosts
     }
   }
