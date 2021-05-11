@@ -22,33 +22,33 @@ const Post = ({
 }) => {
   return (
     <Layout>
-      <section className="flex flex-col m-0 w-3/5 mx-auto min-w-min mt-5 break-words">
+      <section className="bg-white p-5 md:p-10 mx-auto break-words md:w-2/3 lg:w-1/2">
         <Head>
           {postData.title}
         </Head>
         <div className="font-extrabold text-3xl splatfont">
           {postData.title}
         </div>
+        <div className="mt-6">
+          <Date dateString={postData.date} />
+        </div>
         <div className="mt-2 flex">
           {postData.tags.map(tag => {
             return (
-            <div key={tag} className="bg-green-300 px-1 mr-2">
+            <div key={tag} className="bg-green-300 px-2 py-0.5 mr-2">
               <Link href={`/tags/${tag}`}>
                 {tag}
               </Link>
             </div>)
           })}
         </div>
-        <div className="mt-2">
-          <Date dateString={postData.date} />
-        </div>
-        <div className="mt-3">
+        <div className="mt-6">
           <article
-            className="content"
+            className="content text-sm md:text-base"
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           />
         </div>
-        <div className="mt-2">
+        <div className="mt-12">
           <Link href="/">
             <a className="splatfont text-2xl">← Back To Home</a>
           </Link>
