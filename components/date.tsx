@@ -4,7 +4,7 @@ const Date = ({ dateString }) => {
   const date: Date = parseISO(dateString)
   return (
     <time dateTime={dateString}>
-      {format(date, 'yyyy-MM-dd HH:mm:ss')}
+      {format(date, 'yyyy-MM-dd')}
     </time>
   )
 }
