@@ -19,7 +19,7 @@ const Home = ({
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full">
         <ul className="list-none m-0 mx-auto">
           {allPosts.map(({ id, date, title, tags }) => (
-            <li className="mb-10 last:mb-0" key={id}>
+            <li className="mb-8 last:mb-0" key={id}>
               <div className="text-base tracking-wider">
                 <Date dateString={date}></Date>
               </div>
@@ -28,9 +28,9 @@ const Home = ({
                   {title.length > 35 ? title.slice(0, 35).concat('…') : title}
                 </a>
               </Link>
-              <div className="flex mt-2">
+              <div className="flex flex-wrap mt-2">
                 {tags.map(tag => (
-                  <div className="bg-green-300 text-base px-1.5 mr-2">
+                  <div key={tag} className="bg-noshimehana text-white text-base px-1.5 mr-2 mb-2">
                     <Link href={`/tags/${tag}`}>
                       {tag}
                     </Link>
