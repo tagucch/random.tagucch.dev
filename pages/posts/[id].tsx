@@ -33,14 +33,13 @@ const Post = ({
           <Date dateString={postData.date} />
         </div>
         <div className="mt-2 flex">
-          {postData.tags.map(tag => {
-            return (
-            <div key={tag} className="bg-green-300 px-2 py-0.5 mr-2">
+          {postData.tags.map(tag => (
+            <div key={tag} className="bg-noshimehana text-white px-2 py-0.5 mr-2">
               <Link href={`/tags/${tag}`}>
                 {tag}
               </Link>
             </div>)
-          })}
+          )}
         </div>
         <div className="mt-6">
           <article
