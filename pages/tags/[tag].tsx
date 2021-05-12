@@ -26,7 +26,12 @@ const PostFilteredByTag = ({
     <Layout>
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full">
         <div className="mb-8 flex items-center">
-          <div className="bg-green-300 py-0.5 px-2 mr-1">{tag}</div> <div>の記事一覧</div>
+          <div className="bg-noshimehana text-white py-0.5 px-2 mr-1">{tag}</div> <div>の記事一覧</div>
+          <nav className="ml-auto splatfont">
+            <Link href="/tags">
+              <a className="text-noshimehana">→タグいちらん</a>
+            </Link>
+          </nav>
         </div>
         <ul className="list-none m-0 mx-auto">
           {posts.map(({ id, date, title }) => (
