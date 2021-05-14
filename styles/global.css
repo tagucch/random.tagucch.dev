@@ -14,7 +14,7 @@
 @layer base {
   @font-face {
     font-family: Splatfont;
-    src: url('/fonts/Splatfont.ttf') format('ttf');
+    src: url('/fonts/Splatfont.woff') format('woff');
   }
 }
 
