@@ -8,6 +8,7 @@ type Post = {
   id: string
   date: string
   title: string
+  desc?: string
   tags: string[]
 }
 
@@ -56,10 +57,12 @@ export const getPostData = async (id: string) => {
     .process(matterResult.content)
   
   const contentHtml = processedContent.toString()
+  const firstParagraph = contentHtml.match(/<p>(.+)?<\/p>/)
 
   return {
     id,
     contentHtml,
+    desc: firstParagraph[1].replace(/<[^>]*>/g, ''),
     ...matterResult.data as { date: string, title: string, tags: string[] },
   }
 }
