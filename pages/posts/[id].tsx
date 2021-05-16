@@ -9,6 +9,10 @@ import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
 
+const sliceDesc = (desc: string): string => {
+  return desc.length > 120 ? desc.slice(0, 120).concat('...') : desc
+}
+
 const Post = ({
   postData
 }: {
@@ -25,10 +29,14 @@ const Post = ({
     <Layout>
       <section className="bg-white p-5 md:p-10 mx-auto break-words md:w-2/3 lg:w-1/2">
         <Head>
-          {postData.title}
+          <title>{postData.title}</title>
           <meta
             name="description"
-            content={postData.desc}
+            content={sliceDesc(postData.desc)}
+          />
+          <meta
+            property="og:description"
+            content={sliceDesc(postData.desc)}
           />
           <meta
             property="og:image"
