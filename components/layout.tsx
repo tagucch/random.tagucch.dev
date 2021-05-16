@@ -16,21 +16,24 @@ const Layout = ({
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
+          key="description"
           content={desc}
         />
         <meta
           property="og:description"
+          key="og:description"
           content={desc}
         />
         <meta
           property="og:image"
+          key="og:image"
           content={`https://og-image.now.sh/${encodeURI(
             title
           )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
         />
-        <meta name="og:site_name" content={title} />
-        <meta name="og:title" content={title} />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="og:site_name" key="og:site_name" content={title} />
+        <meta name="og:title" key="og:title" content={title} />
+        <meta name="twitter:card" key="twitter:card" content="summary_large_image" />
       </Head>
       <header className="flex flex-col items-center pt-6 mb-10 splatfont mx-auto w-4/5 md:w-1/2">
         {home ? (

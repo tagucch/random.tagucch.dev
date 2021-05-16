@@ -32,20 +32,23 @@ const Post = ({
           <title>{postData.title}</title>
           <meta
             name="description"
+            key="description"
             content={sliceDesc(postData.desc)}
           />
           <meta
             property="og:description"
+            key="og:description"
             content={sliceDesc(postData.desc)}
           />
           <meta
             property="og:image"
+            key="og:image"
             content={`https://og-image.now.sh/${encodeURI(
               postData.title
             )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
           />
-          <meta name="og:title" content={postData.title} />
-          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="og:title" key="og:title" content={postData.title} />
+          <meta name="twitter:card" key="twitter:card" content="summary_large_image" />
         </Head>
         <div className="font-extrabold text-3xl splatfont">
           {postData.title}
