@@ -10,7 +10,7 @@ import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
 
 const sliceDesc = (desc: string): string => {
-  return desc.length > 120 ? desc.slice(0, 120).concat('...') : desc
+  return desc.length > 80 ? desc.slice(0, 80).concat('…') : desc
 }
 
 const Post = ({
