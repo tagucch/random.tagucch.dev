@@ -8,6 +8,7 @@ import {
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
+import { title } from '../../site.conifg.json'
 
 const sliceDesc = (desc: string): string => {
   return desc.length > 80 ? desc.slice(0, 80).concat('…') : desc
@@ -44,7 +45,7 @@ const Post = ({
             property="og:image"
             key="og:image"
             content={`https://og-image.now.sh/${encodeURI(
-              postData.title
+              title
             )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
           />
           <meta name="og:title" key="og:title" content={postData.title} />
