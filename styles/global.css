@@ -134,3 +134,7 @@ a:hover {
   margin-bottom: 1rem;
   line-height: 1.8rem;
 }
+
+.content p > a {
+  text-decoration: underline;
+}
