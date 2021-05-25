@@ -2,8 +2,5 @@
   "title": "random.tagucch.dev",
   "desc": "技術とかの雑なToday I Learnedメモ",
   "author": "tagucch",
-  "host": "https://random.tagucch.dev",
-  "postsDir": "/posts",
-  "feedPath": "/feed.xml",
-  "timeZone": "Asia/Tokyo"
+  "host": "https://random.tagucch.dev"
 }
