@@ -1,7 +1,7 @@
 ---
 title: '雑記をアウトプットするサイトをNext.jsで作った'
 date: '2021-06-01'
-tags: ['poem']
+tags: ['okimochi']
 ---
 
 ## このサイトについて
