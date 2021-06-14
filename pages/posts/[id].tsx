@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -27,6 +28,13 @@ const Post = ({
     tags: string[]
   }
 }) => {
+  useEffect(() => {
+    const s = document.createElement("script");
+    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
+    s.setAttribute("async", "true");
+    document.head.appendChild(s);
+  }, [])
+
   return (
     <Layout>
       <section className="bg-white p-5 md:p-10 mx-auto break-words md:w-2/3 lg:w-1/2">
