@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { GitHub, Twitter } from 'react-feather'
 import { title, desc } from '../site.conifg.json'
 
 const baseUrl = process.env.NEXT_PUBLIC_HOST
@@ -44,7 +45,27 @@ const Layout = ({
             </Link>
           </div>
         )}
-        <h2 className="text-gray-700 text-base break-words max-w-xs md:max-w-md text-center">{desc}</h2>
+        <h2 className="text-gray-700 text-base break-words max-w-xs md:max-w-md text-center">
+          {desc}
+        </h2>
+        <div className="flex mt-4">
+          <a
+            className="mx-2"
+            href="https://github.com/tagucch/random.tagucch.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GitHub color="black" className="h-8 w-8" />
+          </a>
+          <a
+            className="mx-2"
+            href="https://twitter.com/tagucch"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Twitter color="black" className="h-8 w-8" />
+          </a>
+        </div>
       </header>
       <main className="pb-10 mx-auto">{children}</main>
     </div>
