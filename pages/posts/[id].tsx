@@ -37,7 +37,7 @@ const Post = ({
 
   return (
     <Layout>
-      <section className="bg-white p-5 md:p-10 mx-auto break-words md:w-2/3 lg:w-1/2">
+      <section className="bg-white dark:bg-darkbg-article p-5 md:p-10 mx-auto break-words md:w-2/3 lg:w-1/2">
         <Head>
           <title>{postData.title}</title>
           <meta
@@ -58,15 +58,15 @@ const Post = ({
           <meta name="og:title" key="og:title" content={postData.title} />
           <meta name="twitter:card" key="twitter:card" content="summary_large_image" />
         </Head>
-        <div className="font-extrabold text-3xl splatfont">
+        <div className="font-extrabold text-3xl splatfont text-gray-900 dark:text-darktext-title">
           {postData.title}
         </div>
-        <div className="mt-6">
+        <div className="mt-6 dark:text-darktext-black">
           <Date dateString={postData.date} />
         </div>
         <div className="mt-2 flex">
           {postData.tags.map(tag => (
-            <div key={tag} className="bg-noshimehana text-white px-2 py-0.5 mr-2">
+            <div key={tag} className="bg-noshimehana dark:bg-darkbg-tag text-white dark:text-darktext px-2 py-0.5 mr-2">
               <Link href={`/tags/${tag}`}>
                 {tag}
               </Link>
@@ -75,13 +75,13 @@ const Post = ({
         </div>
         <div className="mt-6">
           <article
-            className="content text-sm md:text-base"
+            className="content text-sm md:text-base dark:text-darktext"
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           />
         </div>
         <div className="mt-12">
           <Link href="/">
-            <a className="splatfont text-2xl">← Back To Home</a>
+            <a className="splatfont text-2xl dark:text-darktext-title">← Back To Home</a>
           </Link>
         </div>
       </section>

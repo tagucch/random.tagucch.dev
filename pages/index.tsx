@@ -20,17 +20,17 @@ const Home = ({
         <ul className="list-none m-0 mx-auto">
           {allPosts.map(({ id, date, title, tags }) => (
             <li className="mb-8 last:mb-0" key={id}>
-              <div className="text-base tracking-wider">
+              <div className="text-base tracking-wider dark:text-darktext-black">
                 <Date dateString={date}></Date>
               </div>
               <Link href={`/posts/${id}`}>
-                <a className="text-2xl splatfont">
+                <a className="text-2xl splatfont text-gray-900 dark:text-darktext-title">
                   {title.length > 35 ? title.slice(0, 35).concat('…') : title}
                 </a>
               </Link>
               <div className="flex flex-wrap mt-2">
                 {tags.map(tag => (
-                  <div key={tag} className="bg-noshimehana text-white text-base px-1.5 mr-2 mb-2">
+                  <div key={tag} className="bg-noshimehana dark:bg-darkbg-tag text-white dark:text-darktext text-base px-1.5 mr-2 mb-2">
                     <Link href={`/tags/${tag}`}>
                       {tag}
                     </Link>

@@ -41,7 +41,7 @@ a:hover {
 
 .splatfont {
   --tw-text-opacity: 1;
-  color: rgba(31, 41, 55, var(--tw-text-opacity));
+  /* color: rgba(31, 41, 55, var(--tw-text-opacity)); */
   letter-spacing: 0.2rem;
   font-family: Splatfont, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

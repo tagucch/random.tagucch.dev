@@ -13,7 +13,7 @@ const Layout = ({
     home?: boolean
   }) => {
   return (
-    <div className="min-h-screen min-w-min max-w-full bg-gray-100">
+    <div className="min-h-screen min-w-min max-w-full bg-gray-100 dark:bg-darkbg">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -37,15 +37,15 @@ const Layout = ({
       </Head>
       <header className="flex flex-col items-center pt-6 mb-10 splatfont mx-auto w-4/5 md:w-1/2">
         {home ? (
-          <div className="md:text-4xl sm:text-3xl text-xl font-extrabold my-4 text-gray-900">{title}</div>
+          <div className="md:text-4xl sm:text-3xl text-xl font-extrabold my-4 text-gray-900 dark:text-darktext-title">{title}</div>
         ) : (
           <div className="md:text-4xl sm:text-3xl text-xl font-extrabold my-4">
             <Link href="/">
-              <a className="text-current hover:no-underline text-gray-900">{title}</a>
+              <a className="text-current hover:no-underline text-gray-900 dark:text-darktext-title">{title}</a>
             </Link>
           </div>
         )}
-        <h2 className="text-gray-700 text-base break-words max-w-xs md:max-w-md text-center">
+        <h2 className="text-gray-700 dark:text-darktext text-base break-words max-w-xs md:max-w-md text-center">
           {desc}
         </h2>
         <div className="flex mt-4">
@@ -55,7 +55,7 @@ const Layout = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <GitHub color="black" className="h-8 w-8" />
+            <GitHub color="black" className="h-8 w-8" stroke-width="1.5px" />
           </a>
           <a
             className="mx-2"
@@ -63,7 +63,7 @@ const Layout = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Twitter color="black" className="h-8 w-8" />
+            <Twitter color="black" className="h-8 w-8" stroke-width="1.5px" />
           </a>
         </div>
       </header>
