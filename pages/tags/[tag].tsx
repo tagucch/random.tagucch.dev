@@ -26,21 +26,21 @@ const PostFilteredByTag = ({
     <Layout>
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full">
         <div className="mb-8 flex items-center">
-          <div className="bg-noshimehana text-white py-0.5 px-2 mr-1">{tag}</div> <div>の記事一覧</div>
+          <div className="bg-noshimehana text-white dark:bg-darkbg-tag py-0.5 px-2 mr-1">{tag}</div> <div className=" dark:text-darktext">の記事一覧</div>
           <nav className="ml-auto splatfont">
             <Link href="/tags">
-              <a className="text-noshimehana">→タグいちらん</a>
+              <a className="text-noshimehana dark:text-darktext-title">→タグいちらん</a>
             </Link>
           </nav>
         </div>
         <ul className="list-none m-0 mx-auto">
           {posts.map(({ id, date, title }) => (
             <li className="mb-4 last:mb-0" key={id}>
-              <div className="text-base tracking-wider">
+              <div className="text-base tracking-wider dark:text-darktext-black">
                 <Date dateString={date}></Date>
               </div>
               <Link href={`/posts/${id}`}>
-                <a className="text-2xl splatfont">
+                <a className="text-2xl splatfont dark:text-darktext-title">
                   {title.length > 35 ? title.slice(0, 35).concat('…') : title}
                 </a>
               </Link>
