@@ -16,7 +16,7 @@ const Home = ({
 }) => {
   return (
     <Layout home>
-      <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full">
+      <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <ul className="list-none m-0 mx-auto">
           {allPosts.map(({ id, date, title, tags }) => (
             <li className="mb-8 last:mb-0" key={id}>
