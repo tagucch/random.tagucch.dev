@@ -36,6 +36,40 @@ export const getSortedPostData = (): Post[] => {
   })
 }
 
+type PostForFeed = {
+  id: string
+  content: string,
+  date: string
+  title: string
+  desc?: string
+}
+
+export const getPostDataForFeed = async () => {
+  const fileNames = fs.readdirSync(postsDir)
+  const allPostsPromise = fileNames.map(async (fileName) => {
+    const id = fileName.replace(/\.md$/, '')
+    const postData = await getPostData(id)
+
+    return {
+      id,
+      content: postData.contentHtml,
+      desc: postData.desc,
+      date: postData.date,
+      title: postData.title
+    }
+  })
+
+  const allPosts: PostForFeed[] = await Promise.all(allPostsPromise)
+
+  return allPosts.sort((post1, post2) => {
+    if (post1.date < post2.date) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+}
+
 export const getAllPostIds = () => {
   const fileNames = fs.readdirSync(postsDir)
   return fileNames.map(fileName => {
