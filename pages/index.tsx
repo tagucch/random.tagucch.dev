@@ -3,6 +3,7 @@ import Layout from '../components/layout'
 import { GetStaticProps } from 'next'
 import { getSortedPostData } from '../lib/posts'
 import Date from '../components/date'
+import { generateRssFeed } from '../lib/feed'
 
 const Home = ({
   allPosts
@@ -48,6 +49,7 @@ const Home = ({
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
+  await generateRssFeed()
   const allPosts = getSortedPostData()
   return {
     props: {
