@@ -55,7 +55,7 @@ const Layout = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <GitHub color="black" className="h-8 w-8" stroke-width="1.5px" />
+            <GitHub color="black" className="h-8 w-8" strokeWidth="1.5px" />
           </a>
           <a
             className="mx-2"
@@ -63,7 +63,7 @@ const Layout = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Twitter color="black" className="h-8 w-8" stroke-width="1.5px" />
+            <Twitter color="black" className="h-8 w-8" strokeWidth="1.5px" />
           </a>
         </div>
       </header>
