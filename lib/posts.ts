@@ -108,7 +108,7 @@ export const searchPostsByTag = (tag: string): Post[] => {
     const fullPath = path.join(postsDir, fileName)
     const fileContents = fs.readFileSync(fullPath, 'utf8')
     const matterResult = matter(fileContents)
-    if(!matterResult.data.tags.includes(tag)) return
+    if(!matterResult.data.tags.includes(tag)) return []
     return {
       id,
       ...matterResult.data as { date: string, title: string, tags: string[] }
