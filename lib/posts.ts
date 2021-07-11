@@ -103,7 +103,7 @@ export const getPostData = async (id: string) => {
 
 export const searchPostsByTag = (tag: string): Post[] => {
   const fileNames = fs.readdirSync(postsDir)
-  const filteredPosts: Post[] = fileNames.map(fileName => {
+  const filteredPosts: Post[] = fileNames.flatMap(fileName => {
     const id = fileName.replace(/\.md$/, '')
     const fullPath = path.join(postsDir, fileName)
     const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -113,7 +113,7 @@ export const searchPostsByTag = (tag: string): Post[] => {
       id,
       ...matterResult.data as { date: string, title: string, tags: string[] }
     }
-  }).filter(post => post)
+  })
 
   return filteredPosts
 }
