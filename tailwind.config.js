@@ -1,6 +1,6 @@
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'media', // OSの設定に基づいてダークモードを適用する
+  darkMode: 'class', // ユーザが手動でライトorダークモードに切り替える
   theme: {
     backgroundColor: theme => ({
       ...theme('colors'),

@@ -64,9 +64,9 @@ const Post = ({
         <div className="mt-6 dark:text-darktext-black">
           <Date dateString={postData.date} />
         </div>
-        <div className="mt-2 flex">
+        <div className="flex flex-wrap">
           {postData.tags.map(tag => (
-            <div key={tag} className="bg-noshimehana dark:bg-darkbg-tag text-white dark:text-darktext px-2 py-0.5 mr-2">
+            <div key={tag} className="bg-noshimehana dark:bg-darkbg-tag text-white dark:text-darktext px-2 py-0.5 mt-2 mr-2">
               <Link href={`/tags/${tag}`}>
                 {tag}
               </Link>
