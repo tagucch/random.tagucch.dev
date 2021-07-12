@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { Feed } from 'feed'
 import { getPostDataForFeed } from './posts'
-import { title, desc } from '../site.conifg.json'
+import { title, desc } from '../site.config.json'
 
 export const generateRssFeed = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_HOST ?? ''

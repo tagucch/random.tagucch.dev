@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { GitHub, Twitter, Rss, Sun, Moon } from 'react-feather'
-import { title, desc } from '../site.conifg.json'
+import { title, desc } from '../site.config.json'
 import { useTheme } from 'next-themes'
 
 const baseUrl = process.env.NEXT_PUBLIC_HOST
