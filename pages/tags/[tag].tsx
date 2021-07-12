@@ -24,7 +24,7 @@ const PostFilteredByTag = ({
 }) => {
   return (
     <Layout>
-      <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full">
+      <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <div className="mb-8 flex items-center">
           <div className="bg-noshimehana text-white dark:bg-darkbg-tag py-0.5 px-2 mr-1">{tag}</div> <div className=" dark:text-darktext">の記事一覧</div>
           <nav className="ml-auto splatfont">
