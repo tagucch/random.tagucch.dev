@@ -33,7 +33,7 @@ export const generateRssFeed = async () => {
   const posts = await getPostDataForFeed()
 
   posts.forEach(post => {
-    const url = `${baseUrl}/${post.id}`
+    const url = `${baseUrl}/posts/${post.id}`
     feed.addItem({
       title: post.title,
       description: post.desc ?? '',
