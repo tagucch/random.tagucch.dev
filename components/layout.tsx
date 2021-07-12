@@ -77,14 +77,12 @@ const Layout = ({
           </a>
 
           {/* ライト・ダークモード切り替えボタン */}
-          <div>
-            <button className="mx-2" onClick={() => setTheme('light')}>
-              <Sun color="black" className="h-8 w-8" strokeWidth="1.5px" />
-            </button>
-            <button className="mx-2" onClick={() => setTheme('dark')}>
-              <Moon color="black" className="h-8 w-8" strokeWidth="1.5px" />
-            </button>
-          </div>
+          <button className="mx-2" onClick={() => setTheme('light')}>
+            <Sun color="black" className="h-8 w-8" strokeWidth="1.5px" />
+          </button>
+          <button className="mx-2" onClick={() => setTheme('dark')}>
+            <Moon color="black" className="h-8 w-8" strokeWidth="1.5px" />
+          </button>
 
         </div>
       </header>
