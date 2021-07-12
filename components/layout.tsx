@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { GitHub, Twitter } from 'react-feather'
+import { GitHub, Twitter, Rss } from 'react-feather'
 import { title, desc } from '../site.conifg.json'
 
 const baseUrl = process.env.NEXT_PUBLIC_HOST
@@ -64,6 +64,14 @@ const Layout = ({
             rel="noopener noreferrer"
           >
             <Twitter color="black" className="h-8 w-8" strokeWidth="1.5px" />
+          </a>
+          <a
+            className="mx-2"
+            href="https://random.tagucch.dev/rss/feed.xml"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Rss color="black" className="h-8 w-8" strokeWidth="1.5px" />
           </a>
         </div>
       </header>
