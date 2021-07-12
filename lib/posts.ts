@@ -48,14 +48,14 @@ export const getPostDataForFeed = async () => {
   const fileNames = fs.readdirSync(postsDir)
   const allPostsPromise = fileNames.map(async (fileName) => {
     const id = fileName.replace(/\.md$/, '')
-    const postData = await getPostData(id)
+    const { title, desc, date, contentHtml: content } = await getPostData(id)
 
     return {
       id,
-      content: postData.contentHtml,
-      desc: postData.desc,
-      date: postData.date,
-      title: postData.title
+      content,
+      desc,
+      date,
+      title,
     }
   })
 
