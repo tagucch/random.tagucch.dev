@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { GitHub, Twitter, Rss, Sun, Moon } from 'react-feather'
-import { title, desc } from '../site.config.json'
+import siteConfig from '../site.config.json'
 import { useTheme } from 'next-themes'
 
 const baseUrl = process.env.NEXT_PUBLIC_HOST
@@ -14,6 +14,8 @@ const Layout = ({
     home?: boolean
   }) => {
   const { theme, setTheme } = useTheme()
+  const { title, desc } = siteConfig
+
   return (
     <div className="min-h-screen min-w-min max-w-full bg-gray-100 dark:bg-darkbg">
       <Head>
