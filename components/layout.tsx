@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { GitHub, Twitter, Rss } from 'react-feather'
+import { GitHub, Twitter, Rss, Sun, Moon } from 'react-feather'
 import { title, desc } from '../site.conifg.json'
+import { useTheme } from 'next-themes'
 
 const baseUrl = process.env.NEXT_PUBLIC_HOST
 
@@ -12,6 +13,7 @@ const Layout = ({
     children: React.ReactNode,
     home?: boolean
   }) => {
+  const { theme, setTheme } = useTheme()
   return (
     <div className="min-h-screen min-w-min max-w-full bg-gray-100 dark:bg-darkbg">
       <Head>
@@ -48,14 +50,14 @@ const Layout = ({
         <h2 className="text-gray-700 dark:text-darktext text-base break-words max-w-xs md:max-w-md text-center">
           {desc}
         </h2>
-        <div className="flex mt-4">
+        <div className="flex mt-8">
           <a
             className="mx-2"
-            href="https://github.com/tagucch/random.tagucch.dev"
+            href="https://random.tagucch.dev/rss/feed.xml"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <GitHub color="black" className="h-8 w-8" strokeWidth="1.5px" />
+            <Rss color="black" className="h-8 w-8" strokeWidth="1.5px" />
           </a>
           <a
             className="mx-2"
@@ -67,12 +69,23 @@ const Layout = ({
           </a>
           <a
             className="mx-2"
-            href="https://random.tagucch.dev/rss/feed.xml"
+            href="https://github.com/tagucch/random.tagucch.dev"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Rss color="black" className="h-8 w-8" strokeWidth="1.5px" />
+            <GitHub color="black" className="h-8 w-8" strokeWidth="1.5px" />
           </a>
+
+          {/* ライト・ダークモード切り替えボタン */}
+          <div>
+            <button className="mx-2" onClick={() => setTheme('light')}>
+              <Sun color="black" className="h-8 w-8" strokeWidth="1.5px" />
+            </button>
+            <button className="mx-2" onClick={() => setTheme('dark')}>
+              <Moon color="black" className="h-8 w-8" strokeWidth="1.5px" />
+            </button>
+          </div>
+
         </div>
       </header>
       <main className="pb-10 mx-auto">{children}</main>

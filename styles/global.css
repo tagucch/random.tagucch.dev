@@ -112,22 +112,40 @@ a:hover {
   list-style-position: inside;
 }
 
+/* preタグ 全般設定 */
 .content pre {
-  padding: 0.3rem;
+  padding: 0.3rem 0.7rem;
   margin-bottom: 1rem;
   white-space: pre-wrap;
-  background-color: rgba(209, 213, 219);
 }
-
-.content p > code {
+.content p>code {
   padding: 0.3rem;
   line-height: 1.8rem;
+}
+.content pre>code {
+  line-height: 1.8rem;
+}
+
+/* preタグ ライトモード時 */
+.light .content pre {
+  background-color: rgba(209, 213, 219);
+}
+.light .content p > code {
+  background-color: rgba(209, 213, 219);
+}
+.light .content pre>code {
   background-color: rgba(209, 213, 219);
 }
 
-.content pre > code {
-  line-height: 1.8rem;
-  background-color: rgba(209, 213, 219);
+/* preタグ ダークモード時 */
+.dark .content pre {
+  background-color: rgba(82, 89, 102);
+}
+.dark .content p>code {
+  background-color: rgba(82, 89, 102);
+}
+.dark .content pre>code {
+  background-color: rgba(82, 89, 102);
 }
 
 .content p {
