@@ -98,6 +98,10 @@ a:hover {
   margin-bottom: 1rem;
 }
 
+.content > ul a {
+  text-decoration: underline;
+}
+
 .content > ul > li > ul > li {
   line-height: 1.8rem;
   margin-left: 1rem;
@@ -127,24 +131,24 @@ a:hover {
 }
 
 /* preタグ ライトモード時 */
-.light .content pre {
+html.light .content pre {
   background-color: rgba(209, 213, 219);
 }
-.light .content p > code {
+html.light .content p > code {
   background-color: rgba(209, 213, 219);
 }
-.light .content pre>code {
+html.light .content pre>code {
   background-color: rgba(209, 213, 219);
 }
 
 /* preタグ ダークモード時 */
-.dark .content pre {
+html.dark .content pre {
   background-color: rgba(82, 89, 102);
 }
-.dark .content p>code {
+html.dark .content p>code {
   background-color: rgba(82, 89, 102);
 }
-.dark .content pre>code {
+html.dark .content pre>code {
   background-color: rgba(82, 89, 102);
 }
 
