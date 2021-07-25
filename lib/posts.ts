@@ -90,7 +90,8 @@ export const getAllPostIds = () => {
 }
 
 export const getPostData = async (id: string) => {
-  const fullPath = path.join(postsDir, `${id}.md`)
+  const dirName = id.match(/\d{4}-\d{2}/)[0]
+  const fullPath = path.join(`${postsDir}/${dirName}`, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
 
