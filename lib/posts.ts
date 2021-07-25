@@ -13,19 +13,23 @@ type Post = {
 }
 
 const postsDir: string = path.join(process.cwd(), 'contents')
+const dirents: fs.Dirent[] = fs.readdirSync(postsDir, { withFileTypes: true })
+const dirNames: string[] = dirents.flatMap(dirent => dirent.isDirectory() ? dirent.name : [])
 
 export const getSortedPostData = (): Post[] => {
-  const fileNames = fs.readdirSync(postsDir)
-  const allPosts: Post[] = fileNames.map(fileName => {
-    const id = fileName.replace(/\.md$/, '')
-    const fullPath = path.join(postsDir, fileName)
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const matterResult = matter(fileContents)
-    return {
-      id,
-      ...matterResult.data as { date: string, title: string, tags: string[] }
-    }
-  })
+  const allPosts: Post[] = dirNames.map(dirName => {
+    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
+    return fileNames.map(fileName => {
+      const id = fileName.replace(/\.md$/, '')
+      const fullPath = path.join(`${postsDir}/${dirName}`, fileName)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const matterResult = matter(fileContents)
+      return {
+        id,
+        ...matterResult.data as { date: string, title: string, tags: string[] }
+      }
+    })
+  }).flat()
 
   return allPosts.sort((post1, post2) => {
     if (post1.date < post2.date) {
@@ -45,19 +49,21 @@ type PostForFeed = {
 }
 
 export const getPostDataForFeed = async () => {
-  const fileNames = fs.readdirSync(postsDir)
-  const allPostsPromise = fileNames.map(async (fileName) => {
-    const id = fileName.replace(/\.md$/, '')
-    const { title, desc, date, contentHtml: content } = await getPostData(id)
+  const allPostsPromise = dirNames.map(dirName => {
+    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
+    return fileNames.map(async (fileName) => {
+      const id = fileName.replace(/\.md$/, '')
+      const { title, desc, date, contentHtml: content } = await getPostData(id)
 
-    return {
-      id,
-      content,
-      desc,
-      date,
-      title,
-    }
-  })
+      return {
+        id,
+        content,
+        desc,
+        date,
+        title,
+      }
+    })
+  }).flat()
 
   const allPosts: PostForFeed[] = await Promise.all(allPostsPromise)
 
@@ -71,14 +77,16 @@ export const getPostDataForFeed = async () => {
 }
 
 export const getAllPostIds = () => {
-  const fileNames = fs.readdirSync(postsDir)
-  return fileNames.map(fileName => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, '')
+  return dirNames.map(dirName => {
+    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
+    return fileNames.map(fileName => {
+      return {
+        params: {
+          id: fileName.replace(/\.md$/, '')
+        }
       }
-    }
-  })
+    })
+  }).flat()
 }
 
 export const getPostData = async (id: string) => {
@@ -102,18 +110,20 @@ export const getPostData = async (id: string) => {
 }
 
 export const searchPostsByTag = (tag: string): Post[] => {
-  const fileNames = fs.readdirSync(postsDir)
-  const filteredPosts: Post[] = fileNames.flatMap(fileName => {
-    const id = fileName.replace(/\.md$/, '')
-    const fullPath = path.join(postsDir, fileName)
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const matterResult = matter(fileContents)
-    if(!matterResult.data.tags.includes(tag)) return []
-    return {
-      id,
-      ...matterResult.data as { date: string, title: string, tags: string[] }
-    }
-  })
+  const filteredPosts: Post[] = dirNames.flatMap(dirName => {
+    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
+    return fileNames.map(fileName => {
+      const id = fileName.replace(/\.md$/, '')
+      const fullPath = path.join(`${postsDir}/${dirName}`, fileName)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const matterResult = matter(fileContents)
+      if(!matterResult.data.tags.includes(tag)) return []
+      return {
+        id,
+        ...matterResult.data as { date: string, title: string, tags: string[] }
+      }
+    })
+  }).flat()
 
   return filteredPosts
 }
