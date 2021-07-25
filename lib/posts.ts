@@ -105,7 +105,7 @@ export const getPostData = async (id: string) => {
   return {
     id,
     contentHtml,
-    desc: firstParagraph[1].replace(/<[^>]*>/g, ''),
+    desc: firstParagraph?.[1].replace(/<[^>]*>/g, ''),
     ...matterResult.data as { date: string, title: string, tags: string[] },
   }
 }
