@@ -13,23 +13,25 @@ type Post = {
 }
 
 const postsDir: string = path.join(process.cwd(), 'contents')
-const dirents: fs.Dirent[] = fs.readdirSync(postsDir, { withFileTypes: true })
-const dirNames: string[] = dirents.flatMap(dirent => dirent.isDirectory() ? dirent.name : [])
+const getFilePathList = (dirName: string): string[] => {
+  return fs.readdirSync(dirName, { withFileTypes: true }).flatMap(dirent => {
+    const path = `${dirName}/${dirent.name}`
+    return dirent.isDirectory() ? getFilePathList(path) : path
+  })
+}
+
+const filePathList = getFilePathList(postsDir)
 
 export const getSortedPostData = (): Post[] => {
-  const allPosts: Post[] = dirNames.map(dirName => {
-    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
-    return fileNames.map(fileName => {
-      const id = fileName.replace(/\.md$/, '')
-      const fullPath = path.join(`${postsDir}/${dirName}`, fileName)
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const allPosts: Post[] = filePathList.map(filePath => {
+      const id = path.parse(filePath).name
+      const fileContents = fs.readFileSync(filePath, 'utf8')
       const matterResult = matter(fileContents)
       return {
         id,
         ...matterResult.data as { date: string, title: string, tags: string[] }
       }
-    })
-  }).flat()
+  })
 
   return allPosts.sort((post1, post2) => {
     if (post1.date < post2.date) {
@@ -49,21 +51,18 @@ type PostForFeed = {
 }
 
 export const getPostDataForFeed = async () => {
-  const allPostsPromise = dirNames.map(dirName => {
-    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
-    return fileNames.map(async (fileName) => {
-      const id = fileName.replace(/\.md$/, '')
-      const { title, desc, date, contentHtml: content } = await getPostData(id)
+  const allPostsPromise = filePathList.map(async (filePath) => {
+    const id = path.parse(filePath).name
+    const { title, desc, date, contentHtml: content } = await getPostData(id)
 
-      return {
-        id,
-        content,
-        desc,
-        date,
-        title,
-      }
-    })
-  }).flat()
+    return {
+      id,
+      content,
+      desc,
+      date,
+      title,
+    }
+  })
 
   const allPosts: PostForFeed[] = await Promise.all(allPostsPromise)
 
@@ -77,22 +76,20 @@ export const getPostDataForFeed = async () => {
 }
 
 export const getAllPostIds = () => {
-  return dirNames.map(dirName => {
-    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
-    return fileNames.map(fileName => {
+  return filePathList.map(filePath => {
       return {
         params: {
-          id: fileName.replace(/\.md$/, '')
+          id: path.parse(filePath).name
         }
       }
     })
-  }).flat()
 }
 
 export const getPostData = async (id: string) => {
-  const dirName = id.match(/\d{4}-\d{2}/)[0]
-  const fullPath = path.join(`${postsDir}/${dirName}`, `${id}.md`)
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const filePath = filePathList.find(filePath => {
+    return path.parse(filePath).name === id
+  })
+  const fileContents = fs.readFileSync(filePath, 'utf8')
   const matterResult = matter(fileContents)
 
   const processedContent = await remark()
@@ -111,20 +108,16 @@ export const getPostData = async (id: string) => {
 }
 
 export const searchPostsByTag = (tag: string): Post[] => {
-  const filteredPosts: Post[] = dirNames.flatMap(dirName => {
-    const fileNames = fs.readdirSync(`${postsDir}/${dirName}`)
-    return fileNames.map(fileName => {
-      const id = fileName.replace(/\.md$/, '')
-      const fullPath = path.join(`${postsDir}/${dirName}`, fileName)
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const filteredPosts: Post[] = filePathList.flatMap(filePath => {
+      const id = path.parse(filePath).name
+      const fileContents = fs.readFileSync(filePath, 'utf8')
       const matterResult = matter(fileContents)
       if(!matterResult.data.tags.includes(tag)) return []
       return {
         id,
         ...matterResult.data as { date: string, title: string, tags: string[] }
       }
-    })
-  }).flat()
+  })
 
   return filteredPosts
 }
