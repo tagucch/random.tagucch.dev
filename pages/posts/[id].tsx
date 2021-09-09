@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Prism from 'prismjs'
 import { useEffect } from 'react'
 import {
   GetStaticProps,
@@ -29,6 +30,10 @@ const Post = ({
   }
 }) => {
   useEffect(() => {
+    // prism.jsでのシンタックスハイライト
+    Prism.highlightAll()
+
+    // Twitterのwidget展開
     const s = document.createElement("script");
     s.setAttribute("src", "https://platform.twitter.com/widgets.js");
     s.setAttribute("async", "true");
