@@ -18,7 +18,7 @@
     "react-feather": "^2.0.9",
     "react-twitter-embed": "^3.0.3",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.10",
