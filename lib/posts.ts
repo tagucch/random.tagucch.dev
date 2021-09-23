@@ -119,5 +119,11 @@ export const searchPostsByTag = (tag: string): Post[] => {
       }
   })
 
-  return filteredPosts
+  return filteredPosts.sort((post1, post2) => {
+    if (post1.date < post2.date) {
+      return 1
+    } else {
+      return -1
+    }
+  })
 }
