@@ -9,6 +9,9 @@ import {
   GetStaticPropsContext,
   GetStaticPaths
 } from 'next'
+import { TwitterShareButton } from 'react-share'
+import { Twitter } from 'react-feather'
+import { useTheme } from 'next-themes'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
@@ -41,6 +44,8 @@ const Post = ({
     s.setAttribute("async", "true");
     document.head.appendChild(s);
   }, [])
+
+  const { theme } = useTheme()
 
   return (
     <Layout>
@@ -86,7 +91,12 @@ const Post = ({
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           />
         </div>
-        <div className="mt-12">
+        <div className="mt-8 dark:text-darktext-title">
+          <TwitterShareButton url={`${baseUrl}/posts/${postData.id}`} title={`${postData.title}`} className="flex items-center">
+            <Twitter className="h-6 w-6" strokeWidth="1.5px" /><div className="ml-2 splatfont">Tweet</div>
+          </TwitterShareButton>
+        </div>
+        <div className="mt-4">
           <Link href="/">
             <a className="splatfont text-2xl dark:text-darktext-title">← Back To Home</a>
           </Link>
