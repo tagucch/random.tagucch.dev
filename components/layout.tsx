@@ -17,7 +17,7 @@ const Layout = ({
   const { title, desc } = siteConfig
 
   return (
-    <div className="min-h-screen min-w-min max-w-full bg-gray-100 dark:bg-darkbg">
+    <div className="min-h-screen max-w-full bg-gray-100 dark:bg-darkbg">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
