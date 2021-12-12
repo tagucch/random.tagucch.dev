@@ -24,7 +24,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 a {
@@ -43,8 +43,8 @@ a:hover {
   --tw-text-opacity: 1;
   /* color: rgba(31, 41, 55, var(--tw-text-opacity)); */
   letter-spacing: 0.2rem;
-  font-family: Splatfont, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Splatfont, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 /* .shadow {
@@ -122,11 +122,11 @@ a:hover {
   margin-bottom: 1rem;
   white-space: pre-wrap;
 }
-.content p>code {
+.content p > code {
   padding: 0.3rem;
   line-height: 1.8rem;
 }
-.content pre>code {
+.content pre > code {
   line-height: 1.8rem;
 }
 
@@ -137,7 +137,7 @@ html.light .content pre {
 html.light .content p > code {
   background-color: rgba(209, 213, 219);
 }
-html.light .content pre>code {
+html.light .content pre > code {
   background-color: rgba(209, 213, 219);
 }
 
@@ -145,10 +145,10 @@ html.light .content pre>code {
 html.dark .content pre {
   background-color: rgba(82, 89, 102);
 }
-html.dark .content p>code {
+html.dark .content p > code {
   background-color: rgba(82, 89, 102);
 }
-html.dark .content pre>code {
+html.dark .content pre > code {
   background-color: rgba(82, 89, 102);
 }
 
