@@ -160,3 +160,21 @@ html.dark .content pre > code {
 .content p > a {
   text-decoration: underline;
 }
+
+html.dark .content blockquote {
+  font-style: italic;
+  background-color: rgb(82, 89, 102);
+  position: relative;
+  border-left: 3px solid rgba(209, 213, 219);
+}
+
+html.light .content blockquote {
+  font-style: italic;
+  background-color: rgba(209, 213, 219);
+  position: relative;
+  border-left: 3px solid rgb(82, 89, 102);
+}
+
+.content blockquote p {
+  padding-left: 10px;
+}
