@@ -18,7 +18,8 @@ import Date from '../../components/date'
 
 const baseUrl = process.env.NEXT_PUBLIC_HOST
 
-const sliceDesc = (desc: string): string => {
+const sliceDesc = (desc: string | null): string => {
+  if (!desc) return ''
   return desc.length > 80 ? desc.slice(0, 80).concat('…') : desc
 }
 
