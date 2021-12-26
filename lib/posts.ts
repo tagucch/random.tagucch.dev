@@ -29,7 +29,8 @@ export const getSortedPostData = (): Post[] => {
       const matterResult = matter(fileContents)
       return {
         id,
-        ...matterResult.data as { date: string, title: string, tags: string[] }
+        date: id,
+        ...matterResult.data as { title: string, tags: string[] }
       }
   })
 
@@ -101,9 +102,10 @@ export const getPostData = async (id: string) => {
 
   return {
     id,
+    date: id,
     contentHtml,
     desc: firstParagraph?.[1].replace(/<[^>]*>/g, '') ?? null,
-    ...matterResult.data as { date: string, title: string, tags: string[] },
+    ...matterResult.data as { title: string, tags: string[] },
   }
 }
 
@@ -115,7 +117,8 @@ export const searchPostsByTag = (tag: string): Post[] => {
       if(!matterResult.data.tags.includes(tag)) return []
       return {
         id,
-        ...matterResult.data as { date: string, title: string, tags: string[] }
+        date: id,
+        ...matterResult.data as { title: string, tags: string[] }
       }
   })
 
