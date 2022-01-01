@@ -103,7 +103,7 @@ const Post = ({
           </TwitterShareButton>
         </div>
         <div className="mt-8 dark:text-darktext-title">
-          <HatenaShareButton title={`${postData.title}`}>
+          <HatenaShareButton url={`${baseUrl}/posts/${postData.id}`} title={postData.title}>
             <HatenaIcon className="h-6 w-6" />
           </HatenaShareButton>
           <HatenaShareCount url={`${baseUrl}/posts/${postData.id}`} />
