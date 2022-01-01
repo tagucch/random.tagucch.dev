@@ -9,7 +9,12 @@ import {
   GetStaticPropsContext,
   GetStaticPaths
 } from 'next'
-import { TwitterShareButton } from 'react-share'
+import {
+  TwitterShareButton,
+  HatenaShareButton,
+  HatenaShareCount,
+  HatenaIcon
+} from 'react-share'
 import { Twitter } from 'react-feather'
 import { useTheme } from 'next-themes'
 import Layout from '../../components/layout'
@@ -96,6 +101,12 @@ const Post = ({
           <TwitterShareButton url={`${baseUrl}/posts/${postData.id}`} title={`${postData.title}`} className="flex items-center">
             <Twitter className="h-6 w-6" strokeWidth="1.5px" /><div className="ml-2 splatfont">Tweet</div>
           </TwitterShareButton>
+        </div>
+        <div className="mt-8 dark:text-darktext-title">
+          <HatenaShareButton title={`${postData.title}`}>
+            <HatenaIcon className="h-6 w-6" />
+          </HatenaShareButton>
+          <HatenaShareCount url={`${baseUrl}/posts/${postData.id}`} />
         </div>
         <div className="mt-4">
           <Link href="/">
