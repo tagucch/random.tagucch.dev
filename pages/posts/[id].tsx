@@ -98,7 +98,7 @@ const Post = ({
           />
         </div>
         <div className="mt-8 dark:text-darktext-title">
-          <TwitterShareButton url={`${baseUrl}/posts/${postData.id}`} title={`${postData.title}`} className="flex items-center">
+          <TwitterShareButton url={`${baseUrl}/posts/${postData.id}`} title={postData.title} className="flex items-center">
             <Twitter className="h-6 w-6" strokeWidth="1.5px" /><div className="ml-2 splatfont">Tweet</div>
           </TwitterShareButton>
         </div>
