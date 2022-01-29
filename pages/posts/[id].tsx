@@ -11,9 +11,13 @@ import {
 } from 'next'
 import {
   TwitterShareButton,
+  TwitterIcon,
   HatenaShareButton,
   HatenaShareCount,
-  HatenaIcon
+  HatenaIcon,
+  FacebookShareButton,
+  FacebookShareCount,
+  FacebookIcon,
 } from 'react-share'
 import { Twitter } from 'react-feather'
 import { useTheme } from 'next-themes'
@@ -97,16 +101,33 @@ const Post = ({
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           />
         </div>
-        <div className="mt-8 dark:text-darktext-title">
-          <TwitterShareButton url={`${baseUrl}/posts/${postData.id}`} title={postData.title} className="flex items-center">
-            <Twitter className="h-6 w-6" strokeWidth="1.5px" /><div className="ml-2 splatfont">Tweet</div>
+        <div className="mt-8 dark:text-darktext-title flex flex-col">
+          <TwitterShareButton
+            url={`${baseUrl}/posts/${postData.id}`}
+            title={postData.title}
+            className="mb-3"
+          >
+            <TwitterIcon round size={40} />
           </TwitterShareButton>
-        </div>
-        <div className="mt-8 dark:text-darktext-title">
-          <HatenaShareButton url={`${baseUrl}/posts/${postData.id}`} title={postData.title}>
-            <HatenaIcon className="h-6 w-6" />
+          <FacebookShareButton
+            url={`${baseUrl}/posts/${postData.id}`}
+            title={postData.title}
+            className="mb-3"
+          >
+            <FacebookIcon round size={40} />
+          </FacebookShareButton>
+          <FacebookShareCount  url={`${baseUrl}/posts/${postData.id}`}>
+            {shareCount => <span className="dark:text-darktext">{shareCount}</span>}
+          </FacebookShareCount>
+          <HatenaShareButton
+            url={`${baseUrl}/posts/${postData.id}`}
+            title={postData.title}
+          >
+            <HatenaIcon round size={40} />
           </HatenaShareButton>
-          <HatenaShareCount url={`${baseUrl}/posts/${postData.id}`} />
+          <HatenaShareCount url={`${baseUrl}/posts/${postData.id}`}>
+            {shareCount => <span className="dark:text-darktext">{shareCount}</span>}
+          </HatenaShareCount>
         </div>
         <div className="mt-4">
           <Link href="/">
