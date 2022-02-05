@@ -88,7 +88,7 @@ a:hover {
   font-weight: bold;
 }
 
-.content > ul > li {
+.content ul li {
   line-height: 1.8rem;
   list-style-type: disc;
   list-style-position: inside;
@@ -175,6 +175,6 @@ html.light .content blockquote {
   border-left: 3px solid rgb(82, 89, 102);
 }
 
-.content blockquote p {
+.content blockquote > * {
   padding-left: 10px;
 }
