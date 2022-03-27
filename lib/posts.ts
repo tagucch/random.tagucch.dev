@@ -13,6 +13,7 @@ type Post = {
 }
 
 const postsDir: string = path.join(process.cwd(), 'contents')
+
 const getFilePathList = (dirName: string): string[] => {
   return fs.readdirSync(dirName, { withFileTypes: true }).flatMap(dirent => {
     const path = `${dirName}/${dirent.name}`
@@ -96,7 +97,7 @@ export const getPostData = async (id: string) => {
   const processedContent = await remark()
     .use(html, { sanitize: false })
     .process(matterResult.content)
-  
+
   const contentHtml = processedContent.toString()
   const firstParagraph = contentHtml.match(/<p>(.+)?<\/p>/)
 
@@ -175,8 +176,8 @@ export const getPostsPerYearAndMonths = (yearAndMonth: string) => {
 export const getYearAndMonthsSelectOptions = () => {
   return getAllYearAndMonthsByPathList().map(({ year, month}) => {
     return {
-      label: `${year}-${month}`,
+      lable: `${year}-${month}`,
       value: `${year}/${month}`
     }
-  }).reverse()
+  })
 }
