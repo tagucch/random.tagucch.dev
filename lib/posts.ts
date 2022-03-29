@@ -176,7 +176,7 @@ export const getPostsPerYearAndMonths = (yearAndMonth: string) => {
 export const getYearAndMonthsSelectOptions = () => {
   return getAllYearAndMonthsByPathList().map(({ year, month}) => {
     return {
-      lable: `${year}-${month}`,
+      label: `${year}-${month}`,
       value: `${year}/${month}`
     }
   })
