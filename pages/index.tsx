@@ -1,22 +1,40 @@
 import Link from 'next/link'
 import Layout from '../components/layout'
 import { GetStaticProps } from 'next'
-import { getSortedPostData } from '../lib/posts'
+import { useState } from 'react'
+import Router from 'next/router'
+import { getSortedPostData, getYearAndMonthsSelectOptions } from '../lib/posts'
 import Date from '../components/date'
 import { generateRssFeed } from '../lib/feed'
+import Select from 'react-select'
 
 const Home = ({
-  allPosts
+  allPosts,
+  months
 }: {
   allPosts: {
     id: string
     date: string
     title: string
     tags: string[]
-  }[]
+  }[],
+  months: { label: string, value: string }[]
 }) => {
+  const currentOption = months[0]
+  const [selectedOption, setSelectedOption] = useState(currentOption)
+  const changeYearAndMonth = (selectedOption: { label: string; value: string }) => {
+    setSelectedOption(selectedOption)
+    Router.push('/posts/[...yearAndMonth]', `/posts/${selectedOption.value}`)
+  }
+
   return (
     <Layout home>
+      <Select
+        options={months}
+        defaultValue={selectedOption}
+        onChange={changeYearAndMonth}
+        className="w-4/5 md:w-1/2 max-w-full mx-auto mb-8"
+      />
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <ul className="list-none m-0 mx-auto">
           {allPosts.map(({ id, date, title, tags }) => (
@@ -51,9 +69,11 @@ export default Home
 export const getStaticProps: GetStaticProps = async () => {
   await generateRssFeed()
   const allPosts = getSortedPostData()
+  const months = getYearAndMonthsSelectOptions()
   return {
     props: {
-      allPosts
+      allPosts,
+      months
     }
   }
 }
