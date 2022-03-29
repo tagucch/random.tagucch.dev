@@ -1,21 +1,41 @@
 import Link from 'next/link'
 import Layout from '../../components/layout'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
-import { getAllYearAndMonths, getPostsPerYearAndMonths } from '../../lib/posts'
+import { getAllYearAndMonths, getPostsPerYearAndMonths, getYearAndMonthsSelectOptions } from '../../lib/posts'
 import Date from '../../components/date'
+import { useState } from 'react'
+import Router from 'next/router'
+import Select from 'react-select'
 
 const PostsPerYearAndMonths = ({
-  postsPerYearAndMonth
+  postsPerYearAndMonth,
+  months,
+  currentYearAndMonth
 }: {
   postsPerYearAndMonth: {
     id: string
     date: string
     title: string
     tags: string[]
-  }[]
+  }[],
+  months: { label: string, value: string }[],
+  currentYearAndMonth: string
 }) => {
+  const currentOption = months.find(option => option.label === currentYearAndMonth)
+  const [selectedOption, setSelectedOption] = useState(currentOption)
+  const changeYearAndMonth = (selectedOption: { label: string; value: string }) => {
+    setSelectedOption(selectedOption)
+    Router.push('/posts/[...yearAndMonth]', `/posts/${selectedOption.value}`)
+  }
+
   return (
     <Layout>
+      <Select
+        options={months}
+        defaultValue={selectedOption}
+        onChange={changeYearAndMonth}
+        className="w-4/5 md:w-1/2 max-w-full mx-auto mb-8"
+      />
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <ul className="list-none m-0 mx-auto">
           {postsPerYearAndMonth.map(({ id, date, title, tags }) => (
@@ -58,9 +78,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   const yearAndMonth = `${params?.yearAndMonth[0]}-${params?.yearAndMonth[1]}`
   const postsPerYearAndMonth = getPostsPerYearAndMonths(yearAndMonth)
+  const months = getYearAndMonthsSelectOptions()
   return {
     props: {
-      postsPerYearAndMonth
+      postsPerYearAndMonth,
+      months,
+      currentYearAndMonth: yearAndMonth
     }
   }
 }
