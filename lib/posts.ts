@@ -179,5 +179,5 @@ export const getYearAndMonthsSelectOptions = () => {
       label: `${year}-${month}`,
       value: `${year}/${month}`
     }
-  })
+  }).reverse()
 }
