@@ -3,16 +3,16 @@ import Layout from '../components/layout'
 import { GetStaticProps } from 'next'
 import { useState } from 'react'
 import Router from 'next/router'
-import { getSortedPostData, getYearAndMonthsSelectOptions } from '../lib/posts'
+import { getPostsPerYearAndMonths, getYearAndMonthsSelectOptions } from '../lib/posts'
 import Date from '../components/date'
 import { generateRssFeed } from '../lib/feed'
 import Select from 'react-select'
 
 const Home = ({
-  allPosts,
+  currentMonthPosts,
   months
 }: {
-  allPosts: {
+  currentMonthPosts: {
     id: string
     date: string
     title: string
@@ -37,7 +37,7 @@ const Home = ({
       />
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <ul className="list-none m-0 mx-auto">
-          {allPosts.map(({ id, date, title, tags }) => (
+          {currentMonthPosts.map(({ id, date, title, tags }) => (
             <li className="mb-8 last:mb-0" key={id}>
               <div className="text-base tracking-wider dark:text-darktext-black">
                 <Date dateString={date}></Date>
@@ -68,11 +68,11 @@ export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
   await generateRssFeed()
-  const allPosts = getSortedPostData()
   const months = getYearAndMonthsSelectOptions()
+  const currentMonthPosts = getPostsPerYearAndMonths(months[0].label)
   return {
     props: {
-      allPosts,
+      currentMonthPosts,
       months
     }
   }
