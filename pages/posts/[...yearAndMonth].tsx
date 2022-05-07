@@ -1,26 +1,27 @@
 import Link from 'next/link'
-import Layout from '../components/layout'
-import SingleSelect from '../components/singleSelect'
-import { GetStaticProps } from 'next'
+import Layout from '../../components/layout'
+import SingleSelect from '../../components/singleSelect'
+import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
+import { getAllYearAndMonths, getPostsPerYearAndMonths, getYearAndMonthsSelectOptions } from '../../lib/posts'
+import Date from '../../components/date'
 import { useState } from 'react'
 import Router from 'next/router'
-import { getPostsPerYearAndMonths, getYearAndMonthsSelectOptions } from '../lib/posts'
-import Date from '../components/date'
-import { generateRssFeed } from '../lib/feed'
 
-const Home = ({
-  currentMonthPosts,
-  months
+const PostsPerYearAndMonths = ({
+  postsPerYearAndMonth,
+  months,
+  currentYearAndMonth
 }: {
-  currentMonthPosts: {
+  postsPerYearAndMonth: {
     id: string
     date: string
     title: string
     tags: string[]
   }[],
-  months: { label: string, value: string }[]
+  months: { label: string, value: string }[],
+  currentYearAndMonth: string
 }) => {
-  const currentOption = months[0]
+  const currentOption = months.find(option => option.label === currentYearAndMonth)
   const [selectedOption, setSelectedOption] = useState(currentOption)
   const changeYearAndMonth = (selectedOption: { label: string; value: string }) => {
     setSelectedOption(selectedOption)
@@ -28,7 +29,7 @@ const Home = ({
   }
 
   return (
-    <Layout home>
+    <Layout>
       <SingleSelect
         options={months}
         defaultValue={selectedOption}
@@ -36,7 +37,7 @@ const Home = ({
       />
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <ul className="list-none m-0 mx-auto">
-          {currentMonthPosts.map(({ id, date, title, tags }) => (
+          {postsPerYearAndMonth.map(({ id, date, title, tags }) => (
             <li className="mb-8 last:mb-0" key={id}>
               <div className="text-base tracking-wider dark:text-darktext-black">
                 <Date dateString={date}></Date>
@@ -63,16 +64,25 @@ const Home = ({
   )
 }
 
-export default Home
+export default PostsPerYearAndMonths
 
-export const getStaticProps: GetStaticProps = async () => {
-  await generateRssFeed()
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = getAllYearAndMonths()
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const yearAndMonth = `${params?.yearAndMonth[0]}-${params?.yearAndMonth[1]}`
+  const postsPerYearAndMonth = getPostsPerYearAndMonths(yearAndMonth)
   const months = getYearAndMonthsSelectOptions()
-  const currentMonthPosts = getPostsPerYearAndMonths(months[0].label)
   return {
     props: {
-      currentMonthPosts,
-      months
+      postsPerYearAndMonth,
+      months,
+      currentYearAndMonth: yearAndMonth
     }
   }
 }

@@ -13,6 +13,7 @@ type Post = {
 }
 
 const postsDir: string = path.join(process.cwd(), 'contents')
+
 const getFilePathList = (dirName: string): string[] => {
   return fs.readdirSync(dirName, { withFileTypes: true }).flatMap(dirent => {
     const path = `${dirName}/${dirent.name}`
@@ -96,7 +97,7 @@ export const getPostData = async (id: string) => {
   const processedContent = await remark()
     .use(html, { sanitize: false })
     .process(matterResult.content)
-  
+
   const contentHtml = processedContent.toString()
   const firstParagraph = contentHtml.match(/<p>(.+)?<\/p>/)
 
@@ -129,4 +130,54 @@ export const searchPostsByTag = (tag: string): Post[] => {
       return -1
     }
   })
+}
+
+const getAllYearAndMonthsByPathList = () => {
+  return fs.readdirSync(postsDir).map(dirName => {
+    return {
+      year: `${dirName.match(/\d{4}/g)[0]}`,
+      month: `${dirName.match(/-\d{2}/g)[0].substring(1)}`
+    }
+  })
+}
+
+export const getAllYearAndMonths = () => {
+  return getAllYearAndMonthsByPathList().map(({ year, month }) => {
+    return {
+      params: {
+        yearAndMonth: [year, month]
+      }
+    }
+  })
+}
+
+export const getPostsPerYearAndMonths = (yearAndMonth: string) => {
+  const posts = fs.readdirSync(`${postsDir}/${yearAndMonth}`).map(filePath => {
+      const fullPath = `${postsDir}/${yearAndMonth}/${filePath}`
+      const id = path.parse(filePath).name
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const matterResult = matter(fileContents)
+      return {
+        id,
+        date: id,
+        ...matterResult.data as { title: string, tags: string[] }
+      }
+  })
+
+  return posts.sort((post1, post2) => {
+    if (post1.date < post2.date) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+}
+
+export const getYearAndMonthsSelectOptions = () => {
+  return getAllYearAndMonthsByPathList().map(({ year, month}) => {
+    return {
+      label: `${year}-${month}`,
+      value: `${year}/${month}`
+    }
+  }).reverse()
 }
