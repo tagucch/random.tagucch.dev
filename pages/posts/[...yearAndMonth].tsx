@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Layout from '../../components/layout'
+import SingleSelect from '../../components/singleSelect'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
 import { getAllYearAndMonths, getPostsPerYearAndMonths, getYearAndMonthsSelectOptions } from '../../lib/posts'
 import Date from '../../components/date'
 import { useState } from 'react'
 import Router from 'next/router'
-import Select from 'react-select'
 
 const PostsPerYearAndMonths = ({
   postsPerYearAndMonth,
@@ -30,11 +30,10 @@ const PostsPerYearAndMonths = ({
 
   return (
     <Layout>
-      <Select
+      <SingleSelect
         options={months}
         defaultValue={selectedOption}
         onChange={changeYearAndMonth}
-        className="w-4/5 md:w-1/2 max-w-full mx-auto mb-8"
       />
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <ul className="list-none m-0 mx-auto">

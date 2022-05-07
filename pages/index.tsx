@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import Layout from '../components/layout'
+import SingleSelect from '../components/singleSelect'
 import { GetStaticProps } from 'next'
 import { useState } from 'react'
 import Router from 'next/router'
 import { getPostsPerYearAndMonths, getYearAndMonthsSelectOptions } from '../lib/posts'
 import Date from '../components/date'
 import { generateRssFeed } from '../lib/feed'
-import Select from 'react-select'
 
 const Home = ({
   currentMonthPosts,
@@ -29,11 +29,10 @@ const Home = ({
 
   return (
     <Layout home>
-      <Select
+      <SingleSelect
         options={months}
         defaultValue={selectedOption}
         onChange={changeYearAndMonth}
-        className="w-4/5 md:w-1/2 max-w-full mx-auto mb-8"
       />
       <section className="text-xl pt-px mx-auto w-4/5 md:w-1/2 max-w-full break-words">
         <ul className="list-none m-0 mx-auto">
