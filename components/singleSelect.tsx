@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import Select, { StylesConfig } from 'react-select'
 
@@ -13,7 +13,7 @@ const SingleSelect = ({
 }) => {
   const { theme } = useTheme()
   const [isLightMode, setIsLightMode] = useState(true)
-  useEffect(() => {
+  useLayoutEffect(() => {
     const isLightMode = theme === 'light'
     setIsLightMode(isLightMode)
   })
