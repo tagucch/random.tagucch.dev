@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import Select, { StylesConfig } from 'react-select'
 
@@ -11,7 +12,11 @@ const SingleSelect = ({
   onChange: (selectedOption: { label: string, value: string }) => void
 }) => {
   const { theme } = useTheme()
-  const isLightMode = theme === 'light'
+  const [isLightMode, setIsLightMode] = useState(true)
+  useLayoutEffect(() => {
+    const isLightMode = theme === 'light'
+    setIsLightMode(isLightMode)
+  })
   const customStyles: StylesConfig = {
     control: (styles) => {
       if (isLightMode) return styles
