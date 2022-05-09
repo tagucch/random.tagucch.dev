@@ -11,11 +11,11 @@ const SingleSelect = ({
   defaultValue: { label: string, value: string }
   onChange: (selectedOption: { label: string, value: string }) => void
 }) => {
-  const { theme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
   const [isLightMode, setIsLightMode] = useState(true)
   useLayoutEffect(() => {
     // シークレットモードだとsystemがundefinedになる
-    const currentTheme = theme ?? 'light'
+    const currentTheme = theme ?? resolvedTheme
     const isLightMode = currentTheme === 'light'
     setIsLightMode(isLightMode)
   })
