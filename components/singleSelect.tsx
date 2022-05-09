@@ -14,7 +14,9 @@ const SingleSelect = ({
   const { theme } = useTheme()
   const [isLightMode, setIsLightMode] = useState(true)
   useLayoutEffect(() => {
-    const isLightMode = theme === 'light'
+    // シークレットモードだとsystemがundefinedになる
+    const currentTheme = theme ?? 'light'
+    const isLightMode = currentTheme === 'light'
     setIsLightMode(isLightMode)
   })
   const customStyles: StylesConfig = {
