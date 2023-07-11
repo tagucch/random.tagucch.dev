@@ -18,7 +18,7 @@
     "react-feather": "^2.0.10",
     "react-select": "^5.4.0",
     "react-share": "^4.4.0",
-    "react-twitter-embed": "^3.0.3",
+    "react-twitter-embed": "^4.0.4",
     "remark": "^13.0.0",
     "remark-html": "^13.0.2"
   },
