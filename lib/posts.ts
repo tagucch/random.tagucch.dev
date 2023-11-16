@@ -46,7 +46,7 @@ export const getSortedPostData = (): Post[] => {
 
 type PostForFeed = {
   id: string
-  content: string,
+  content: string
   date: string
   title: string
   desc?: string
